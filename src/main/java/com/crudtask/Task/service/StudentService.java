@@ -22,7 +22,7 @@ public class StudentService {
 
 
 
-    public void updateStudent(Student student, Integer id) {
+    public Student updateStudent(Student student, Integer id) {
         Student updateStudent = studentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Student Record not found"));
         updateStudent.setStudentName(student.getStudentName());
@@ -30,8 +30,10 @@ public class StudentService {
         updateStudent.setEmail(student.getEmail());
         updateStudent.setNumber(student.getNumber());
         studentRepository.save(updateStudent);
+        return updateStudent;
     }
-    public void deleteStudent(Integer id) {
+    public boolean deleteStudent(Integer id) {
         studentRepository.deleteById(id);
+        return false;
     }
 }

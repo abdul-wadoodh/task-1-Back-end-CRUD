@@ -13,7 +13,7 @@ public class Student {
     private int StudentId;
     private String StudentName;
     private String Email;
-    private int number;
+    private long number;
     private String Department;
 
     public int getStudentId() {
@@ -40,11 +40,11 @@ public class Student {
         Email = email;
     }
 
-    public int getNumber() {
+    public long getNumber() {
         return number;
     }
 
-    public void setNumber(int number) {
+    public void setNumber(long number) {
         this.number = number;
     }
 

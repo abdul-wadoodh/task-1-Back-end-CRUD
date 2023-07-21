@@ -9,8 +9,12 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
-@RequestMapping("/students")
+
+
+@CrossOrigin(origins = "*" )
+@RestController()
+@RequestMapping(value = "/students")
+
 public class StudentController {
     @Autowired
     private StudentService studentService;
@@ -26,15 +30,22 @@ public class StudentController {
         return ResponseEntity.status(HttpStatus.CREATED).body(student);
     }
 
+
     @PutMapping("/{id}")
     public ResponseEntity<Student> updateStudent(@RequestBody Student student, @PathVariable Integer id) {
-        studentService.updateStudent(student, id);
-        return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+        Student updatedStudent = studentService.updateStudent(student, id);
+        if (updatedStudent != null) {
+            return ResponseEntity.status(HttpStatus.ACCEPTED).body(updatedStudent);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Student> deleteStudent(@PathVariable Integer id) {
         studentService.deleteStudent(id);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
+
     }
+
 }
